@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% if object %}Editar Evento{% else %}Crear Nuevo Evento{% endif %}</h1>
+    <hr>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn" style="width: auto;">Guardar Cambios</button>
+        <a href="{{ object.get_absolute_url|default:'/' }}">Cancelar</a>
+    </form>
+{% endblock %}

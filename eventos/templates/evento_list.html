@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Próximos Eventos</h1>
+    
+    {% if perms.eventos.add_evento %}
+        {# Añadimos la clase 'btn' para que parezca un botón #}
+        <a href="{% url 'evento_create' %}" class="btn">Crear Nuevo Evento</a>
+    {% endif %}
+
+    {# Añadimos la clase 'event-list' a la lista #}
+    <ul class="event-list">
+        {% for evento in eventos %}
+            <li>
+                <a href="{% url 'evento_detail' pk=evento.pk %}">{{ evento.nombre }}</a>
+                (Organizador: {{ evento.organizador.username }})
+            </li>
+        {% empty %}
+            <p>No hay eventos programados.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}

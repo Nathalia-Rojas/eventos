@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ object.nombre }}</h1>
+    <p><strong>Ubicación:</strong> {{ object.ubicacion }}</p>
+    <p><strong>Fecha:</strong> {{ object.fecha }}</p>
+    <p><strong>Organizador:</strong> {{ object.organizador.username }}</p>
+
+    <hr>
+
+    {% if perms.eventos.change_evento %}
+        <a href="{% url 'evento_update' pk=object.pk %}" class="btn">Editar Evento</a>
+    {% endif %}
+    {% if perms.eventos.delete_evento %}
+        <a href="{% url 'evento_delete' pk=object.pk %}" class="btn" style="background-color: #dc3545;">Eliminar Evento</a>
+    {% endif %}
+{% endblock %}
